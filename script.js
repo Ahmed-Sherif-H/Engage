@@ -1,7 +1,7 @@
 // Countdown Timer Functionality
 function updateCountdown() {
     // Set the engagement date (December 14th, 2024 at 6:00 PM)
-    const engagementDate = new Date('December 14, 2024 18:00:00').getTime();
+    const engagementDate = new Date('September 5, 2025 18:00:00').getTime();
     const now = new Date().getTime();
     const distance = engagementDate - now;
 
