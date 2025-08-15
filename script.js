@@ -147,6 +147,9 @@ function initParallaxEffect() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure page starts at the top
+    window.scrollTo(0, 0);
+    
     // Start the countdown timer
     updateCountdown();
     setInterval(updateCountdown, 1000);
@@ -167,8 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-// Add some additional visual enhancements
+// Ensure page starts at top when window loads
 window.addEventListener('load', function() {
+    // Force scroll to top
+    window.scrollTo(0, 0);
+    
     // Add a subtle floating animation to the hero content
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
