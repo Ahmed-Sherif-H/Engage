@@ -6,7 +6,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scroll-padding-top: 0;
 }
 
@@ -552,6 +552,8 @@ p {
     border: none;
     border-radius: 15px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 /* Responsive Game Sizing */

@@ -147,7 +147,8 @@ function initParallaxEffect() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Ensure page starts at the top
+    // Immediately force scroll to top and disable smooth scrolling temporarily
+    document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, 0);
     
     // Start the countdown timer
@@ -167,12 +168,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setTimeout(() => {
         document.body.style.opacity = '1';
+        // Re-enable smooth scrolling after page is loaded
+        document.documentElement.style.scrollBehavior = 'smooth';
     }, 100);
 });
 
 // Ensure page starts at top when window loads
 window.addEventListener('load', function() {
-    // Force scroll to top
+    // Force scroll to top again and ensure it stays there
     window.scrollTo(0, 0);
     
     // Add a subtle floating animation to the hero content
@@ -180,7 +183,36 @@ window.addEventListener('load', function() {
     if (heroContent) {
         heroContent.style.animation = 'fadeInUp 1s ease-out, float 6s ease-in-out infinite';
     }
+    
+    // Final check to ensure we're at the top
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
 });
+
+// Optimize game iframe loading
+function optimizeGameLoading() {
+    const gameIframe = document.querySelector('#game iframe');
+    if (gameIframe) {
+        // Lazy load the game iframe
+        gameIframe.setAttribute('loading', 'lazy');
+        // Only load when it comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Game is now visible, ensure it's loaded
+                    if (gameIframe.src) {
+                        gameIframe.style.opacity = '1';
+                    }
+                }
+            });
+        });
+        observer.observe(gameIframe);
+    }
+}
+
+// Call game optimization when DOM is ready
+document.addEventListener('DOMContentLoaded', optimizeGameLoading);
 
 // Add floating animation keyframes
 const style = document.createElement('style');
